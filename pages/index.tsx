@@ -5,6 +5,7 @@ import Winnings from "../components/winning";
 import Reveal from "../components/reveal";
 import Images from "../components/images";
 import ResultsTable from "../components/ResultsTable";
+import Amount from "../components/amount"
 
 export default function MyPage() {
   const [time, setTime] = useState(new Date());
@@ -81,8 +82,7 @@ export default function MyPage() {
         </section>
         <section className="flex justify-center border-2 h-[10%] rounded-2xl">
           <div className="flex items-center h-full w-1/2">
-            {" "}
-            {/* <Amounts />  */}
+            <Amount/>
           </div>
         </section>
       </div>
