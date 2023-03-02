@@ -1,4 +1,3 @@
-import { time } from "console";
 import { useState, useEffect } from "react";
 
 function ResultsTable() {
@@ -31,7 +30,6 @@ function ResultsTable() {
     });
 
   useEffect(() => {
-    const intervalId = setInterval(async () => {
       Promise.all(
         drawTimesArray.map((drawTime) =>
           fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
@@ -39,10 +37,9 @@ function ResultsTable() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
-    }, 10000);
 
     return () => clearInterval(intervalId);
-  }, [time]);
+  }, []);
 
   const getRowClassName = (winningNumber) => {
     // if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {

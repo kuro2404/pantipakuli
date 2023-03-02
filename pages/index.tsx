@@ -45,13 +45,13 @@ export default function MyPage() {
       <Head>
         <title>Panti Pakuli</title>
       </Head>
-      <video
+      {/* <video
         className="h-screen w-screen object-cover absolute"
         muted
         loop
         autoPlay
         src="/background.mp4"
-      />
+      /> */}
       <div className="bg-black opacity-80 h-screen w-screen absolute"></div>
       <div className="text-white h-screen w-screen absolute">
         <section className="h-[50%] border-2 rounded-2xl">
