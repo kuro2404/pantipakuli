@@ -38,7 +38,7 @@ function winnings() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
-    }, 299000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, []);
