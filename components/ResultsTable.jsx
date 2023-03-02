@@ -1,3 +1,4 @@
+import { time } from "console";
 import { useState, useEffect } from "react";
 
 function ResultsTable() {
@@ -38,10 +39,10 @@ function ResultsTable() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [time]);
 
   const getRowClassName = (winningNumber) => {
     // if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {
