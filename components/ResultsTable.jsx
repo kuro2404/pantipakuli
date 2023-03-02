@@ -31,7 +31,7 @@ function ResultsTable() {
     });
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const intervalId = setInterval(async () => {
       Promise.all(
         drawTimesArray.map((drawTime) =>
           fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
