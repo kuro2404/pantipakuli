@@ -30,6 +30,8 @@ function ResultsTable() {
     });
 
   useEffect(() => {
+    const intervalId = setTimeout(() => {
+
       Promise.all(
         drawTimesArray.map((drawTime) =>
           fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
@@ -37,6 +39,7 @@ function ResultsTable() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, []);
