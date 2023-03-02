@@ -30,6 +30,7 @@ function winnings() {
     });
 
   useEffect(() => {
+    const intervalId = setTimeout(() => {
       Promise.all(
         drawTimesArray.map((drawTime) =>
           fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
@@ -37,6 +38,7 @@ function winnings() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -54,7 +56,7 @@ function winnings() {
           {results[index] !== undefined && ( // Make sure the value is defined before rendering
             <img
               className="h-full w-full"
-              src={`/Images/${
+              src={`/images/${
                 results[index] === 0 ? "0.png" : results[index] + ".png"
               }`}
               alt={`Winning Image for ${results[index]}`}
