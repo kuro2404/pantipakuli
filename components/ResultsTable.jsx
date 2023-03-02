@@ -54,7 +54,7 @@ function ResultsTable() {
           <div className="border-2">
             {results[index] !== undefined && ( // Make sure the value is defined before rendering
               <img
-                src={`/images/${
+                src={`/Images/${
                   results[index] === 0 ? "0.png" : results[index] + ".png"
                 }`}
                 className="w-[100%] h-full rounded-xl p-2"

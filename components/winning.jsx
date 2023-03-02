@@ -54,7 +54,7 @@ function winnings() {
           {results[index] !== undefined && ( // Make sure the value is defined before rendering
             <img
               className="h-full w-full"
-              src={`/images/${
+              src={`/Images/${
                 results[index] === 0 ? "0.png" : results[index] + ".png"
               }`}
               alt={`Winning Image for ${results[index]}`}
