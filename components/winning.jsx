@@ -51,7 +51,7 @@ function winnings() {
       }, 2000);
   
       return () => clearInterval(intervalId);
-    }, []);
+    }, [drawTimes]);
 
   // const getRowClassName = (winningNumber) => {
   //     if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {
