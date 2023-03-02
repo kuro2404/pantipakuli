@@ -63,7 +63,7 @@ export default function Images() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentMinute(new Date().getMinutes());
-    }, 60000);
+    }, 6000);
     return () => clearInterval(intervalId);
   }, []);
   // const win = fetch(`/api/results?drawTime=${drawTime}`).then(res => res.json())
