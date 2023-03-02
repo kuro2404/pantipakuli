@@ -1,7 +1,8 @@
+import { time } from "console";
 import { useState, useEffect } from "react";
 
 function winnings() {
-  const [drawTime, setDrawTime] = useState([]);
+  const [drawTime, setDrawTimes] = useState([]);
   const [results, setResults] = useState([]);
 
   // Calculate the 10 previous draw times with 5-minute intervals
@@ -30,7 +31,6 @@ function winnings() {
     });
 
   useEffect(() => {
-    const intervalId = setTimeout(() => {
       Promise.all(
         drawTimesArray.map((drawTime) =>
           fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
@@ -38,7 +38,6 @@ function winnings() {
       ).then((results) => {
         setResults(results.map((result) => result.winningNumber));
       });
-    }, 2000);
 
     return () => clearInterval(intervalId);
   }, []);
