@@ -49,7 +49,7 @@ const AdminPanel = () => {
     minute: "2-digit",
   });
   console.log(nextToDrawtime);
-
+ 
   {
     /** iMAGE BETS */
   }

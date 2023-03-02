@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 export default async function handler(req, res) {
   // Set up the connection URL and database name
-  const uri = process.env.MONGODB_URI;
+  const uri = process.env.MONGODB_URL;
   const client = new MongoClient(uri, { useUnifiedTopology: true });
   const dbName = 'test';
 
@@ -15,8 +15,8 @@ export default async function handler(req, res) {
     // Generate the list of draw times
     const startHour = 1;
     const startMinute = 0;
-    const interval = 5;
-    const numDraws = 288;
+    const interval = 1;
+    const numDraws = 1440;
 
     const drawTimes = [];
     for (let hour = startHour; hour <= 12; hour++) {
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     const docs = [];
     for (let i = 0; i < numDraws; i++) {
       const doc = {
-        winningNumber: Math.floor(Math.random() * 12) ,
+        couponNum: Math.floor(Math.random() *10) ,
         drawTime: drawTimes[i]
       };
       docs.push(doc);

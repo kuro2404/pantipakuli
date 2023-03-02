@@ -29,14 +29,14 @@ function ResultsTable() {
       });
     });
 
-      Promise.all(
-        drawTimesArray.map((drawTime) =>
-          fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
-        )
-      ).then((results) => {
-        setResults(results.map((result) => result.winningNumber));
-      });
-
+  Promise.all(
+    drawTimesArray.map((drawTime) =>
+      fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
+    )
+  ).then((results) => {
+    setResults(results.map((result) => result.winningNumber));
+  });
+console.log(results)
   const getRowClassName = (winningNumber) => {
     // if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {
     //   return "";
@@ -46,18 +46,16 @@ function ResultsTable() {
   return (
     <div className="flex first-letter">
       {drawTimesArray.map((drawTime, index) => (
-        <div key={drawTime} className="">
-          <div className="border-2">
-            {results[index] !== undefined && ( // Make sure the value is defined before rendering
-              <img
-                src={`/Images/${
-                  results[index] === 0 ? "0.png" : results[index] + ".png"
-                }`}
-                className="w-[100%] h-full rounded-xl p-2"
-                alt={`Winning Image for ${results[index]}`}
-              />
-            )}
-          </div>
+        <div key={drawTime} className="border-2 rounded-2xl">
+          {results[index] !== undefined && ( // Make sure the value is defined before rendering
+            <img
+              src={`/Images/${
+                results[index] === 0 ? "0.png" : results[index] + ".png"
+              }`}
+              className="w-[100%] h-full rounded-2xl"
+              alt={`Winning Image for ${results[index]}`}
+            />
+          )}
         </div>
       ))}
     </div>

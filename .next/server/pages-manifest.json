@@ -3,5 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/results": "pages/api/results.js",
+  "/admin": "pages/admin.js",
+  "/api/updateWinningNumber": "pages/api/updateWinningNumber.js",
   "/": "pages/index.js"
 }

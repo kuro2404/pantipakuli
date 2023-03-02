@@ -1,60 +1,66 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
-function Winnings() {
-  const [drawTime, setDrawTime] = useState("");
-  const [result, setResult] = useState("");
+function winnings() {
+  const [drawTimes, setDrawTimes] = useState([]);
+  const [results, setResults] = useState([]);
 
-  // Calculate the current draw time with 5-minute intervals
+  // Calculate the 10 previous draw times with 5-minute intervals
   const now = new Date();
   const currentMinutes = now.getMinutes();
   const nearestMultipleOfFive = Math.floor(currentMinutes / 5) * 5;
-  const currentDrawTime = new Date(
+  const startDrawTime = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
     now.getHours(),
     nearestMultipleOfFive,
     0
-  ).toLocaleString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
+  );
+  const drawTimesArray = Array(1)
+    .fill()
+    .map((_, index) => {
+      const drawTime = new Date(
+        startDrawTime.getTime() - index * 5 * 60 * 1000
+      );
+      return drawTime.toLocaleString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+    });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      axios
-        .get(`/api/results?drawTime=${currentDrawTime}`)
-        .then((res) => {
-          const result = res.data.winningNumber;
-          if (result !== undefined) {
-            setResult(result);
-            setDrawTime(currentDrawTime);
-          }
-        })
-        .catch((err) => console.error(err));
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [currentDrawTime]);
+      Promise.all(
+        drawTimesArray.map((drawTime) =>
+          fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
+        )
+      ).then((results) => {
+        setResults(results.map((result) => result.winningNumber));
+      });
+ 
+console.log(results)
+  // const getRowClassName = (winningNumber) => {
+  //     if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {
+  //     return "";
+  //     }
+  //     };
 
   return (
     <div className="h-full">
-      {result !== undefined && (
-        <div className="w-full h-full object-cover ">
-          <img
-            className="h-full w-full"
-            src={`/images/${result === 0 ? "0.png" : result + ".png"}`}
-            alt={`Winning Image for ${result}`}
-          />
-          <p className="text-lg font-semibold text-center mt-4">
-            Winning Number for {drawTime}
-          </p>
+      {drawTimesArray.map((drawTime, index) => (
+        <div key={drawTime} className="w-full h-full object-cover ">
+          {results[index] !== undefined && ( // Make sure the value is defined before rendering
+            <img
+              className="h-full w-full rounded-3xl"
+              src={`/images/${
+                results[index] === 0 ? "0.png" : results[index] + ".png"
+              }`}
+              alt={`Winning Image for ${results[index]}`}
+            />
+          )}
         </div>
-      )}
+      ))}
     </div>
   );
 }
 
-export default Winnings;
+export default winnings;

@@ -77,7 +77,7 @@ export default function Images() {
           <img
             src={`/Images/${img}`}
             className={`w-full h-full   ${
-              i === index ? "border-white border-4 border-dashed rounded-xl" : "border-transparent"
+              i === index ? "border-white border-4 border-dashed rounded-xl" : "rounded-2xl border-transparent"
             } `}
             alt={img}
           />
