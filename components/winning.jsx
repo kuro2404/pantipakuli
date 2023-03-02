@@ -29,29 +29,14 @@ function winnings() {
       });
     });
 
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        Promise.all(
-          drawTimesArray.map((drawTime) =>
-            fetch(`/api/results?drawTime=${drawTime}`)
-              .then((res) => {
-                if (!res.ok) {
-                  throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
-                }
-                return res.json();
-              })
-              .catch((err) => {
-                console.log(`Error fetching from API: ${err}`);
-                return { winningNumber: undefined };
-              })
-          )
-        ).then((results) => {
-          setResults(results.map((result) => result.winningNumber));
-        });
-      }, 2000);
-  
-      return () => clearInterval(intervalId);
-    }, []);
+      Promise.all(
+        drawTimesArray.map((drawTime) =>
+          fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
+        )
+      ).then((results) => {
+        setResults(results.map((result) => result.winningNumber));
+      });
+ 
 
   // const getRowClassName = (winningNumber) => {
   //     if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {

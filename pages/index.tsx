@@ -60,7 +60,7 @@ export default function MyPage() {
           </div>
           <div className="flex justify-center items-start w-full h-[80%]">
             <div className="w-1/3 h-full border-2">
-              {/* <ResultsTable /> */}
+              <ResultsTable />
               <div className="h-auto flex justify-around">
                 <div className="px-2 py-1 border-2">Latest</div>
                 <div className="px-2 py-1 border-2">Old</div>
