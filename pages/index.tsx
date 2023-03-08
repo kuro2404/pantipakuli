@@ -50,20 +50,20 @@ export default function MyPage() {
 
     function run() {
       if (timeToDraw === 0) {
-        window.location.reload();
+        // window.location.reload();
       }
       // if (timeToDraw < 299 && !wheelSoundPlayed) {
       //   wheelSound.play();
       //   wheelSoundPlayed = true;
       // }
-      if (timeToDraw == 290 && !winningSoundPlayed) {
+      if (timeToDraw == 296 && !winningSoundPlayed) {
         winningSound.play();
         winningSoundPlayed = true;
       }
       if (timeToDraw == 290){
         timeRemainingSound.stop()
       }
-      if (timeToDraw == 295 && !timeRemainingSoundPlayed) {
+      if (timeToDraw == 2 && !timeRemainingSoundPlayed) {
         timeRemainingSound.play();
         timeRemainingSoundPlayed = true;
       }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function ResultsTable() {
   const [drawTimes, setDrawTimes] = useState([]);
@@ -29,19 +30,31 @@ function ResultsTable() {
       });
     });
 
-  Promise.all(
-    drawTimesArray.map((drawTime) =>
-      fetch(`/api/results?drawTime=${drawTime}`).then((res) => res.json())
-    )
-  ).then((results) => {
-    setResults(results.map((result) => result.winningNumber));
-  });
-console.log(results)
-  const getRowClassName = (winningNumber) => {
-    // if (winningNumber === 1 || winningNumber === 5 || winningNumber === 9) {
-    //   return "";
-    // }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responses = await Promise.all(
+          drawTimesArray.map((drawTime) =>
+            axios.get(`/api/results?drawTime=${drawTime}`)
+          )
+        );
+        const results = responses.map((response) => response.data.couponNum);
+        setResults(results);
+        setDrawTimes(drawTimesArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 60000); // Fetch data every minute
+
+    return () => clearInterval(intervalId);
+  }, [drawTimesArray]);
+  
 
   return (
     <div className="flex first-letter">

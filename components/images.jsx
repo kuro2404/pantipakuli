@@ -47,7 +47,7 @@ export default function Images() {
     const timeToDraw = Math.floor((nextToDraw - time) / 1000);
 
     let intervalId;
-    if (timeToDraw > 0 && timeToDraw < 5) {
+    if (timeToDraw == 0) {
       intervalId = setInterval(() => {
         setIndex((prevIndex) => (prevIndex + 1) % 12);
       }, 100);

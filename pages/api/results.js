@@ -1,34 +1,24 @@
-import { MongoClient } from 'mongodb';
+import fs from 'fs';
+import path from 'path';
 
 export default async function handler(req, res) {
-  // Set up the connection URL and database name
-  const uri = process.env.MONGODB_URI;
-  const client = new MongoClient(uri, { useUnifiedTopology: true });
-  const dbName = 'test';
-
-  // Connect to the database
   try {
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection('fetchResults');
+    // Read the data from results.json
+    const dataPath = path.join(process.cwd(), 'data', 'results.json');
+    const jsonData = fs.readFileSync(dataPath, 'utf-8');
+    const results = JSON.parse(jsonData);
 
-    // Extract the draw time from the request payload
+    // Find the result for the given drawTime
     const { drawTime } = req.query;
+    const result = results.find((r) => r.drawTime === drawTime);
 
-    // Find the document with the corresponding draw time
-    const result = await collection.findOne({ drawTime: { $eq: drawTime } });
-   
-    // If a document is found, return the winning number
-    if (result) {
-      res.status(200).json({ winningNumber: result.winningNumber });
+    if (!result) {
+      res.status(404).json({ message: 'Result not found' });
     } else {
-      res.status(404).json({ message: `No winning number found for draw time: ${drawTime}` });
+      res.status(200).json({ couponNum: result.couponNum });
     }
-
   } catch (err) {
-    console.log('Error connecting to database:', err);
-    res.status(500).json({ message: 'Error connecting to database' });
-  } finally {
-    await client.close();
+    console.log('Error reading file:', err);
+    res.status(500).json({ message: 'Error reading file' });
   }
 }
