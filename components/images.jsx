@@ -17,7 +17,7 @@ export default function Images() {
     "kabutar",
     "sasah",
   ];
-
+  
   const [index, setIndex] = useState(0);
   const [time, setTime] = useState(new Date());
   const [currentMinute, setCurrentMinute] = useState(time.getMinutes());
@@ -69,7 +69,6 @@ export default function Images() {
   // const win = fetch(`/api/results?drawTime=${drawTime}`).then(res => res.json())
   // console.log(win)
 
-
   return (
     <div className="grid grid-rows-2 grid-cols-6 w-full h-full">
       {imgs.map((img, i) => (
@@ -77,7 +76,9 @@ export default function Images() {
           <img
             src={`/images/${img}`}
             className={`w-full h-full   ${
-              i === index ? "border-white border-4 border-dashed rounded-xl" : "rounded-2xl border-transparent"
+              i === index
+                ? "border-white border-4 border-dashed rounded-xl"
+                : "rounded-2xl border-transparent"
             } `}
             alt={img}
           />
