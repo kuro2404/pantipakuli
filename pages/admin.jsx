@@ -63,10 +63,11 @@ const AdminPanel = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          winningNumber: index ,
-          nextToDrawtime: nextToDrawtime,
+          couponNum: index ,
+          drawTime: nextToDrawtime,
         }),
       });
+      console.log(nextToDrawtime)
       const data = await response.json();
       console.log(data);
       if (data.success) {

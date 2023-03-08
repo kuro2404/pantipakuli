@@ -63,7 +63,7 @@ export default function MyPage() {
       if (timeToDraw == 290){
         timeRemainingSound.stop()
       }
-      if (timeToDraw == 2 && !timeRemainingSoundPlayed) {
+      if (timeToDraw == 6 && !timeRemainingSoundPlayed) {
         timeRemainingSound.play();
         timeRemainingSoundPlayed = true;
       }
@@ -100,7 +100,7 @@ export default function MyPage() {
             <div className="w-1/3 h-full p-4 border-y-4 rounded-3xl">
               <Winnings />
               <div className="h-full w-full rounded-3xl ">
-                <Reveal />
+                {/* <Reveal /> */}
               </div>
             </div>
             <div className="w-1/3 h-full rounded-3xl border-x-4 bg-slate-900 p-2 flex justify-center items-center">
