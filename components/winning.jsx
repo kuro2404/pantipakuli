@@ -24,7 +24,7 @@ function Winnings() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Delay for 1 second
+      await new Promise((resolve) => setTimeout(resolve, 0)); // Delay for 1 second
       try {
         const response = await axios.get(`/api/results?drawTime=${currentDrawTime}`);
         const result = response.data.couponNum;
@@ -36,7 +36,7 @@ function Winnings() {
         console.log(error);
       }
     };
-    fetchData();
+    fetchData();x
   }, [currentDrawTime]);
 
   return (
@@ -45,7 +45,7 @@ function Winnings() {
         <div className="w-full h-full object-cover ">
           <img
             className="h-full w-full absolute"
-            src={`/images/${result === 0 ? "0.png" : result + ".png"}`}
+            src={`/Images/${result === 0 ? "0.png" : result + ".png"}`}
             alt={`Winning Image for ${result}`}
           />
           <p className="w-full h-full rounded absolute">
