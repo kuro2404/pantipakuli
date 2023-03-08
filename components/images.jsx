@@ -17,7 +17,7 @@ export default function Images() {
     "kabutar",
     "sasah",
   ];
-  
+
   const [index, setIndex] = useState(0);
   const [time, setTime] = useState(new Date());
   const [currentMinute, setCurrentMinute] = useState(time.getMinutes());
@@ -74,7 +74,7 @@ export default function Images() {
       {imgs.map((img, i) => (
         <button key={i} onClick={() => handleBetClick(i)}>
           <img
-            src={`/images/${img}`}
+            src={`/Images/${img}`}
             className={`w-full h-full   ${
               i === index
                 ? "border-white border-4 border-dashed rounded-xl"

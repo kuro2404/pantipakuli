@@ -45,7 +45,7 @@ function Winnings() {
         <div className="w-full h-full object-cover ">
           <img
             className="h-full w-full absolute"
-            src={`/images/${result === 0 ? "0.png" : result + ".png"}`}
+            src={`/Images/${result === 0 ? "0.png" : result + ".png"}`}
             alt={`Winning Image for ${result}`}
           />
           <p className="w-full h-full rounded absolute">
