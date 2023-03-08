@@ -62,7 +62,7 @@ function ResultsTable() {
         <div key={drawTime} className="border-2 rounded-2xl">
           {results[index] !== undefined && ( // Make sure the value is defined before rendering
             <img
-              src={`/Images/${
+              src={`/images/${
                 results[index] === 0 ? "0.png" : results[index] + ".png"
               }`}
               className="w-[100%] h-full rounded-2xl"
